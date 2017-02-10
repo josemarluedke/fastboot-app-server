@@ -15,6 +15,7 @@ class Worker {
     this.password = options.password;
     this.beforeMiddleware = options.beforeMiddleware;
     this.afterMiddleware = options.afterMiddleware;
+    this.resilient = options.resilient;
 
     if (!this.httpServer) {
       this.httpServer = new ExpressHTTPServer({
@@ -66,6 +67,7 @@ class Worker {
   buildMiddleware() {
     this.fastboot = new FastBoot({
       distPath: this.distPath,
+      resilient: this.resilient
     });
 
     return fastbootMiddleware({
